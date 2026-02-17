@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IO Game Arcade - Neon Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Orbitron:wght@400;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="sidebar" class="hidden-sidebar">
+        <div class="game-icon" onclick="gameManager.loadLobby()" title="Home">
+            🏠<div class="tooltip">Lobby</div>
+        </div>
+        <div class="game-icon" onclick="gameManager.loadGame(1)">
+            ⚔️<div class="tooltip">Slice.io</div>
+        </div>
+        <div class="game-icon" onclick="gameManager.loadGame(2)">
+            🎵<div class="tooltip">Beat.io</div>
+        </div>
+        <div class="game-icon" onclick="gameManager.loadGame(3)">
+            🐍<div class="tooltip">Snake.io</div>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        
+        <div style="position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100;">
+            <div id="user-badge" class="glass-card" style="width: auto; height: 40px; padding: 0 15px; flex-direction: row; border-radius: 20px; font-size: 14px; display: none;">
+                <span id="player-name">Player</span>&nbsp; | &nbsp;<span id="player-level" style="color: var(--accent-cyan); font-weight: bold; margin-top:0;">Lv.1</span>
+                <button id="btn-logout" style="background:none; border:none; color:var(--accent-magenta); margin-left:10px; cursor:pointer;">✖</button>
+            </div>
+            <button id="btn-show-login" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">LOGIN</button>
+            <button id="theme-toggle" title="Toggle Theme" style="position: relative; top: 0; right: 0;">☀</button>
+        </div>
+
+        <div id="lobby-screen">
+            <h1 class="game-title">IO ARCADE 🕹️</h1>
+            <p class="subtitle">Select a Game Mode</p>
+            
+            <div class="feature-icons">
+                <div class="f-item" style="cursor: pointer;" onclick="gameManager.showLeaderboard('slice-io')">🏆<span>Leaderboard</span></div>
+                <div class="f-item">⚡<span>Instant Play</span></div>
+                <div class="f-item">🎮<span>Arcade Fun</span></div>
+            </div>
+
+            <div class="game-grid">
+                <div class="glass-card" onclick="gameManager.loadGame(1)">
+                    <div class="emoji-icon">⚔️</div>
+                    <h3>SLICE.IO</h3>
+                    <span>Fruit Ninja Style</span>
+                </div>
+                <div class="glass-card" onclick="gameManager.loadGame(2)">
+                    <div class="emoji-icon">🎵</div>
+                    <h3>BEAT.IO</h3>
+                    <span>Rhythm Royale</span>
+                </div>
+                <div class="glass-card" onclick="gameManager.loadGame(3)">
+                    <div class="emoji-icon">🐍</div>
+                    <h3>SNEK.IO</h3>
+                    <span>Battle Royale Snake</span>
+                </div>
+            </div>
+            <div class="asset-credit">Use Mouse/Touch to Play</div>
+        </div>
+
+        <div id="auth-modal" class="modal-overlay" style="display: none;">
+            <div class="overlay-card" style="width: 350px; padding: 30px;">
+                <h2 style="font-family: 'Orbitron'; color: var(--accent-cyan); margin-top:0;">ACCESS ARCHIVE</h2>
+                <input type="email" id="auth-email" placeholder="Email" class="neon-input">
+                <input type="text" id="auth-user" placeholder="Username (Register only)" class="neon-input">
+                <input type="password" id="auth-pass" placeholder="Password" class="neon-input">
+                <p id="auth-error" style="color: #ff3838; font-size: 12px; height: 15px;"></p>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 15px;">
+                    <button class="btn btn-primary" id="btn-login" style="padding: 10px;">LOGIN</button>
+                    <button class="btn btn-secondary" id="btn-register" style="padding: 10px;">REGISTER</button>
+                    <button class="btn" onclick="document.getElementById('auth-modal').style.display='none'" style="background:transparent; color:#aaa; padding:5px;">CANCEL</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="leaderboard-modal" class="modal-overlay" style="display: none;">
+            <div class="overlay-card" style="width: 450px; padding: 30px;">
+                <h2 style="font-family: 'Orbitron'; color: var(--accent-magenta); margin-top:0;">GLOBAL RANKINGS</h2>
+                
+                <div style="display:flex; justify-content:center; gap:10px; margin-bottom: 20px;">
+                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="gameManager.showLeaderboard('slice-io')">SLICE.IO</button>
+                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="gameManager.showLeaderboard('beat-io')">BEAT.IO</button>
+                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="gameManager.showLeaderboard('snek-io')">SNEK.IO</button>
+                </div>
+
+                <div id="lb-content" style="max-height: 250px; overflow-y: auto; text-align: left; margin-bottom: 20px;">
+                    <div style="text-align:center; color:#aaa;">Loading...</div>
+                </div>
+
+                <button class="btn btn-secondary" onclick="document.getElementById('leaderboard-modal').style.display='none'">CLOSE</button>
+            </div>
+        </div>
+
+        <div id="game-overlay">
+            <div class="overlay-card">
+                <div class="ov-title" id="ov-title">GAME TITLE</div>
+                <div class="ov-desc" id="ov-desc">Game Rules Description</div>
+                <div class="ov-score" id="ov-score" style="display:none">0</div>
+                
+                <div id="ai-roast-box">
+                    <span class="ai-loading">✨ Generating Match Analysis...</span>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="btn-action">START</button>
+                    <button class="btn btn-secondary" onclick="gameManager.loadLobby()">EXIT</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="hud">
+            <div class="hud-text" id="scoreDisplay">SCORE: 0</div>
+            <div class="hud-text" id="levelDisplay">LVL: 1</div>
+        </div>
+        
+        <div id="ioMessage" class="io-msg"></div>
+        <div id="feedbackMessage" class="feedback-msg"></div>
+
+        <div id="snake-ui">
+            <div id="commentary-box"></div>
+            <div class="mini-map">
+                <canvas id="minimap-canvas"></canvas>
+            </div>
+        </div>
+
+    </div>
+    
+    <audio id="bgMusic" src="https://files.freemusicarchive.org/storage-freemusicarchive-org/tracks/vF4z7USaG5h3f1a6q7h7XwS3P6u1B1U1g4y7.mp3" preload="auto" loop></audio>
+    <script type="module" src="js/main.js"></script>
+
+</body>
+</html>
