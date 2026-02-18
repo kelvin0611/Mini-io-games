@@ -34,6 +34,17 @@ A cyberpunk-themed gaming platform featuring multiple competitive "IO-style" min
 
 ---
 
+## 📸 Screenshots / Demo
+
+
+> - ![Lobby Screen](screenshots/lobby.png) – Game selection interface
+> - ![database](screenshots/datasheet.png) – user datasheet
+> - ![Gameplay](screenshots/gameplay.png) – gameplay
+> - ![User Profile](screenshots/profile.png) – Player profile
+> - ![Demo](screenshots/Demo.mp4) – Demo Video
+
+---
+
 ## 🎯 Technical Challenges & What I Learned
 
 ### **1. Database Schema Design (Relational Modeling)**
@@ -123,63 +134,6 @@ snake.y += snake.velocityY * deltaTime * speed;
 
 ---
 
-## 📦 Installation & Setup
-
-### **Prerequisites**
-- **Node.js** v16+ ([Download](https://nodejs.org))
-- **PostgreSQL** (or Neon account for cloud DB)
-- **Git** & **npm**
-
-### **Step 1: Clone & Install Dependencies**
-```bash
-cd io-arcade-backend
-npm install
-```
-
-### **Step 2: Configure Environment Variables**
-Create a `.env` file in `io-arcade-backend/`:
-```env
-# Database Connection (Get URL from Neon Console)
-DATABASE_URL=postgresql://user:password@host:5432/neondb
-
-# JWT Secret (Generate random string)
-JWT_SECRET=your_super_secret_key_here_min_32_chars
-
-# Server Config
-PORT=3000
-NODE_ENV=development
-```
-
-### **Step 3: Initialize Database**
-```bash
-# Run Prisma migrations
-npx prisma db push
-
-# (Optional) Open Prisma Studio to view/edit data
-npx prisma studio
-```
-
-### **Step 4: Start Backend Server**
-```bash
-npm run dev
-# Server runs on http://127.0.0.1:3000
-```
-
-### **Step 5: Start Frontend**
-In a separate terminal, use **Live Server** extension in VS Code, or:
-```bash
-npx live-server
-# Opens on http://127.0.0.1:5500
-```
-
-### **Step 6: Test the Platform**
-1. Navigate to `http://127.0.0.1:5500`
-2. Click **LOGIN** → **REGISTER** to create an account
-3. Select a game and play to completion
-4. View your score on the **🏆 LEADERBOARD**
-
-
----
 
 ## 🚀 Key Code Highlights
 
@@ -280,26 +234,6 @@ export const submitScore = async (req, res, next) => {
 
 ---
 
-## 📸 Screenshots / Demo
-
-
-> - ![Lobby Screen](screenshots/lobby.png) – Game selection interface
-> - ![database](screenshots/datasheet.png) – user datasheet
-> - ![Gameplay](screenshots/gameplay.png) – gameplay
-> - ![User Profile](screenshots/profile.png) – Player profile
-
----
-
-## 🔐 Security Considerations
-
-- **Passwords**: Hashed with Argon2 (resistant to brute force)
-- **Tokens**: JWT with 7-day expiry + HTTP-only cookies
-- **CORS**: Whitelisted origins only
-- **Rate Limiting**: Max 10 score submissions per minute per user
-- **Input Validation**: All user inputs sanitized before DB insertion
-- **HTTPS Ready**: Secure cookie flag enabled in production
-
----
 
 ## 🤝 Contributing & Feedback
 
@@ -313,22 +247,6 @@ This project is a portfolio piece. If you have feedback, ideas, or spot bugs:
 ## 📄 License
 
 This project is open source under the **MIT License**. See [LICENSE](LICENSE) for details.
-
----
-
-## 👨‍💻 About Me
-
-Hello! I'm a Computer Science student passionate about **full-stack development** and **game mechanics**. This project showcases my ability to:
-- Design and build scalable backend APIs
-- Create engaging frontend experiences
-- Manage databases and real-time data flow
-- Think critically about security, performance, and UX
-
-**Let's connect!**
-- 📧 Email: your.email@example.com
-- 🔗 LinkedIn: [linkedin.com/in/yourprofile](https://linkedin.com)
-- 💼 Portfolio: [yourportfolio.com](https://yourportfolio.com)
-- 🐙 GitHub: [@yourprofile](https://github.com/yourprofile)
 
 ---
 
