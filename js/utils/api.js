@@ -1,5 +1,5 @@
 // js/utils/api.js
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'http://127.0.0.1:3000/api';
 
 async function fetchAPI(endpoint, options = {}) {
     try {
