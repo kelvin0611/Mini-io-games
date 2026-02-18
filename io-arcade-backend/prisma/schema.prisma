@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  totalXp   Int      @default(0)
+  level     Int      @default(1)
+  loadout   Json     @default("{\"avatar\": \"default\", \"snekSkin\": \"green\", \"beatNotes\": \"neon\"}")
+  createdAt DateTime @default(now())
+
+  scores     Score[]
+  challenges Challenge[]
+}
+
+model Score {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  gameId    String   // e.g., "slice-io", "beat-io", "snek-io"
+  score     Int
+  duration  Int      // Seconds played
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@index([gameId, score(sort: Desc)])
+}
+
+model Challenge {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  desc      String
+  target    Int
+  progress  Int      @default(0)
+  xpReward  Int
+  type      String   // "daily" or "weekly"
+  completed Boolean  @default(false)
+  expiresAt DateTime
+
+  user      User     @relation(fields: [userId], references: [id])
+}
