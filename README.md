@@ -282,11 +282,11 @@ export const submitScore = async (req, res, next) => {
 
 ## 📸 Screenshots / Demo
 
-> *Add screenshots here*
+
 > - ![Lobby Screen](screenshots/lobby.png) – Game selection interface
-> - ![Leaderboard](screenshots/leaderboard.png) – Global rankings with badges
-> - ![Gameplay](screenshots/gameplay.png) – In-game HUD with score tracking
-> - ![User Profile](screenshots/profile.png) – Player badge with XP bar
+> - ![Leaderboard](screenshots/databse.png) – user datasheet
+> - ![Gameplay](screenshots/gameplay.png) – gameplay
+> - ![User Profile](screenshots/profile.png) – Player profile
 
 ---
 
