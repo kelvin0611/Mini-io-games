@@ -20,18 +20,6 @@ A cyberpunk-themed gaming platform featuring multiple competitive "IO-style" min
 - **XP & Leveling System**: Dynamic progression tracking with configurable XP rewards per game
 - **User Profile Badge HUD**: Real-time display of player name, level, and XP progress bar
 
-### **Global Leaderboards**
-- **Per-Game Rankings**: Top 100 scores per game fetched and sorted by backend
-- **Tab-based UI**: Easy switching between game leaderboards
-- **Rank Badges**: Visual indicators (🥇 1ST, 🥈 2ND, 🥉 3RD) for top performers
-- **Score Persistence**: All scores saved to PostgreSQL with timestamps
-
-### **Visual & UX**
-- **Glassmorphism Design**: Modern UI with backdrop blur and neon accent colors
-- **Dark/Light Theme Toggle**: Persistent theme preference in localStorage
-- **Responsive Layout**: Full-screen canvas with sidebar navigation
-- **Real-time HUD**: Live score, level, and feedback animations during gameplay
-
 ---
 
 ## 🛠️ Tech Stack
@@ -190,51 +178,6 @@ npx live-server
 3. Select a game and play to completion
 4. View your score on the **🏆 LEADERBOARD**
 
----
-
-## 🏗️ Project Architecture
-
-```
-io-arcade-backend/          # Express REST API
-├── src/
-│   ├── server.js           # App initialization, CORS, routes
-│   ├── config/
-│   │   └── db.js           # Prisma client setup
-│   ├── middleware/
-│   │   ├── auth.js         # JWT verification
-│   │   ├── errorHandler.js # Global error handler
-│   │   └── rateLimiter.js  # Rate limiting for APIs
-│   ├── modules/            # Feature-based organization
-│   │   ├── auth/           # Register, Login, Logout
-│   │   ├── users/          # User profile endpoints
-│   │   ├── scores/         # Score submission & leaderboards
-│   │   └── challenges/     # Daily/Weekly challenges (future)
-│   ├── sockets/
-│   │   └── snek.handler.js # WebSocket events for multiplayer
-│   └── utils/
-│       └── levelSystem.js  # XP & level calculation logic
-
-js/                         # Vanilla JavaScript Frontend
-├── main.js                 # GameManager, auth flow, UI orchestration
-├── games/
-│   ├── SliceGame.js        # Fruit cutting mechanics
-│   ├── BeatGame.js         # Rhythm game loop
-│   └── SnakeGame.js        # Snake movement & collision
-└── utils/
-    ├── api.js              # Fetch wrapper for backend calls
-    ├── global.js           # Shared canvas & globals
-    ├── audio.js            # Background music & SFX
-    ├── input.js            # Mouse/Keyboard event listeners
-    └── assets.js           # Image/Sprite loading
-
-css/
-└── style.css               # Glassmorphism theme, animations
-
-index.html                  # Entry point
-
-prisma/
-└── schema.prisma           # Database models & migrations
-```
 
 ---
 
