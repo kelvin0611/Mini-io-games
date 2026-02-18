@@ -28,9 +28,18 @@
         <canvas id="gameCanvas"></canvas>
         
         <div style="position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100;">
-            <div id="user-badge" class="glass-card" style="width: auto; height: 40px; padding: 0 15px; flex-direction: row; border-radius: 20px; font-size: 14px; display: none;">
-                <span id="player-name">Player</span>&nbsp; | &nbsp;<span id="player-level" style="color: var(--accent-cyan); font-weight: bold; margin-top:0;">Lv.1</span>
-                <button id="btn-logout" style="background:none; border:none; color:var(--accent-magenta); margin-left:10px; cursor:pointer;">✖</button>
+            <div id="user-badge" class="user-hud hidden">
+                <div class="hud-avatar">👤</div>
+                <div class="hud-info">
+                    <div class="hud-top">
+                        <span id="player-name">Player</span>
+                        <span class="hud-lvl" id="player-level">Lv.1</span>
+                    </div>
+                    <div class="xp-bar-container">
+                        <div id="player-xp-bar" class="xp-fill" style="width: 0%;"></div>
+                    </div>
+                </div>
+                <button id="btn-logout" class="btn-icon" title="Logout">✖</button>
             </div>
             <button id="btn-show-login" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">LOGIN</button>
             <button id="theme-toggle" title="Toggle Theme" style="position: relative; top: 0; right: 0;">☀</button>
@@ -83,20 +92,26 @@
         </div>
 
         <div id="leaderboard-modal" class="modal-overlay" style="display: none;">
-            <div class="overlay-card" style="width: 450px; padding: 30px;">
-                <h2 style="font-family: 'Orbitron'; color: var(--accent-magenta); margin-top:0;">GLOBAL RANKINGS</h2>
+            <div class="overlay-card lb-card">
+                <h2 class="neon-title">GLOBAL RANKINGS</h2>
                 
-                <div style="display:flex; justify-content:center; gap:10px; margin-bottom: 20px;">
-                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="gameManager.showLeaderboard('slice-io')">SLICE.IO</button>
-                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="gameManager.showLeaderboard('beat-io')">BEAT.IO</button>
-                    <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="gameManager.showLeaderboard('snek-io')">SNEK.IO</button>
+                <div class="lb-tabs">
+                    <button class="lb-tab active" onclick="gameManager.switchLbTab('slice-io', this)">SLICE.IO</button>
+                    <button class="lb-tab" onclick="gameManager.switchLbTab('beat-io', this)">BEAT.IO</button>
+                    <button class="lb-tab" onclick="gameManager.switchLbTab('snek-io', this)">SNEK.IO</button>
                 </div>
 
-                <div id="lb-content" style="max-height: 250px; overflow-y: auto; text-align: left; margin-bottom: 20px;">
-                    <div style="text-align:center; color:#aaa;">Loading...</div>
+                <div class="lb-header">
+                    <span>RANK</span>
+                    <span>PLAYER</span>
+                    <span>SCORE</span>
                 </div>
 
-                <button class="btn btn-secondary" onclick="document.getElementById('leaderboard-modal').style.display='none'">CLOSE</button>
+                <div id="lb-content" class="lb-list">
+                    <div class="loading-text">Loading data...</div>
+                </div>
+
+                <button class="btn btn-secondary close-btn" onclick="document.getElementById('leaderboard-modal').style.display='none'">CLOSE</button>
             </div>
         </div>
 
