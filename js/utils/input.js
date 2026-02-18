@@ -1,4 +1,4 @@
-import { globals } from './globals.js';
+import { globals } from './global.js';
 
 export const Input = {
     x: 0, y: 0, isDown: false, keys: {},
