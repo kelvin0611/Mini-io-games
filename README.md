@@ -41,7 +41,7 @@ A cyberpunk-themed gaming platform featuring multiple competitive "IO-style" min
 > **Note**: The live demo assumes the backend is active. If the backend is sleeping, leaderboard features may pause.
 
 ### 🎥 Video Walkthrough
-[![Neon Arcade Demo Video](https://img.youtube.com/vi/dDYyjLja17Q/0.jpg)](https://youtu.be/dDYyjLja17Q "Watch the Demo on YouTube")
+[![Neon Arcade Demo Video](https://img.youtube.com/vi/dDYyjLja17Q/0.jpg)](https://youtu.be/RrIFYIdNoNA "Watch the Demo on YouTube")
 
 ### 🖼️ Interface Previews
 | **Lobby Interface** | **In-Game Action** |
