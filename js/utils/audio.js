@@ -50,7 +50,14 @@ export const AudioEngine = {
         this.musicEl.currentTime = 0;
         this.musicEl.playbackRate = rate;
         this.musicEl.volume = 0.5;
-        this.musicEl.play().catch(e => console.log("Audio interaction needed"));
+        // Resume audio context if suspended
+        if (this.ctx.state === 'suspended') {
+            this.ctx.resume().then(() => {
+                this.musicEl.play().catch(e => console.log("Audio interaction needed"));
+            });
+        } else {
+            this.musicEl.play().catch(e => console.log("Audio interaction needed"));
+        }
     },
     stopMusic() {
         if(this.musicEl) this.musicEl.pause();
