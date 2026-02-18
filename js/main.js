@@ -11,7 +11,24 @@ import SnakeGame from './games/SnakeGame.js';
 globals.canvas = document.getElementById('gameCanvas');
 globals.ctx = globals.canvas.getContext('2d');
 
-// DPI scaling for crisp canvas rendering
+// Mobile detection
+const isMobile = window.matchMedia('(max-width: 800px)').matches;
+const isTablet = window.matchMedia('(min-width: 601px) and (max-width: 1024px)').matches;
+
+// Prevent pinch zoom on iOS
+document.addEventListener('touchmove', (e) => {
+    if (e.touches.length > 1) e.preventDefault();
+}, { passive: false });
+
+// Prevent double-tap zoom
+let lastTouchEnd = 0;
+document.addEventListener('touchend', (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) e.preventDefault();
+    lastTouchEnd = now;
+}, false);
+
+// DPI scaling for crisp canvas rendering (Mobile Optimized)
 function resize() {
     const container = document.getElementById('game-container');
     const dpr = window.devicePixelRatio || 1;
@@ -35,8 +52,17 @@ function resize() {
         miniCanvas.width = 150;
         miniCanvas.height = 150;
     }
+    
+    // Adjust canvas for mobile notch (safe area)
+    if (isMobile) {
+        const safeArea = window.navigator.standalone ? 0 : 0;
+        globals.canvas.style.paddingTop = safeArea + 'px';
+    }
 }
 window.addEventListener('resize', resize);
+window.addEventListener('orientationchange', () => {
+    setTimeout(resize, 100); // Delay for orientation change animation
+});
 resize();
 
 Assets.load();
