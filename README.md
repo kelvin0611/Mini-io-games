@@ -284,7 +284,7 @@ export const submitScore = async (req, res, next) => {
 
 
 > - ![Lobby Screen](screenshots/lobby.png) – Game selection interface
-> - ![Leaderboard](screenshots/databse.png) – user datasheet
+> - ![database](screenshots/datasheet.png) – user datasheet
 > - ![Gameplay](screenshots/gameplay.png) – gameplay
 > - ![User Profile](screenshots/profile.png) – Player profile
 
