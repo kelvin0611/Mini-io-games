@@ -36,12 +36,19 @@ A cyberpunk-themed gaming platform featuring multiple competitive "IO-style" min
 
 ## 📸 Screenshots / Demo
 
+### 🚀 [**Click Here to Play the Live Demo**](https://kelvin0611.github.io/Mini-io-games/)
 
-> - ![Lobby Screen](screenshots/lobby.png) – Game selection interface
-> - ![database](screenshots/datasheet.png) – user datasheet
-> - ![Gameplay](screenshots/gameplay.png) – gameplay
-> - ![User Profile](screenshots/profile.png) – Player profile
-> - ![Demo](screenshots/Demo.mp4) – Demo Video
+> **Note**: The live demo assumes the backend is active. If the backend is sleeping, leaderboard features may pause.
+
+### 🎥 Video Walkthrough
+[![Neon Arcade Demo Video](https://img.youtube.com/vi/dDYyjLja17Q/0.jpg)](https://youtu.be/dDYyjLja17Q "Watch the Demo on YouTube")
+
+### 🖼️ Interface Previews
+| **Lobby Interface** | **In-Game Action** |
+|:---:|:---:|
+| ![Lobby Screen](screenshots/lobby.png) | ![Gameplay](screenshots/gameplay.png) |
+| **User Profile HUD** | **Backend Data Structure** |
+| ![User Profile](screenshots/profile.png) | ![Database Schema](screenshots/datasheet.png) |
 
 ---
 
