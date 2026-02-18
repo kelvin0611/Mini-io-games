@@ -1,5 +1,5 @@
-import { globals } from '../utils/globals.js';
-import { Input } from '../utils/inputs.js';
+import { globals } from '../utils/global.js';
+import { Input } from '../utils/input.js';
 
 const SNAKE_CONFIG = {
     mapSize: 4000,
